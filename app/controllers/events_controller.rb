@@ -1,9 +1,12 @@
 class EventsController < ApplicationController
 
 	before_action :set_event, :only => [ :show, :edit, :update, :destroy]
+	def new
+ 		@event = Event.new
+ 	end
+
 	def index
 		@events = Event.all
-		@events =Event.new
 		#@events = Event.page(params[:page]).per(5)
 	end
 
@@ -12,6 +15,7 @@ class EventsController < ApplicationController
 		if @event.save
 			redirect_to :action => :index
 			flash[:notice] = "event was successfully created"
+
 		else
 			render :action => :new
 		end
@@ -31,7 +35,11 @@ class EventsController < ApplicationController
 
  	def update
 		if @event.update(event_params)
+			flash[:notice] = "event was successfully updated!"
 			redirect_to :action => :show, :id => @event
+			#***RESTful**** redirect_to event_path(@event) # events/:id
+			# event_path(@event) # events/:id
+			# event_url(@event) # http://localhost:3000/events/:id 
 		else
 			render :action => :edit
 		end
