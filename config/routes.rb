@@ -6,5 +6,7 @@ Demo::Application.routes.draw do
     # ...
     root :to => "welcome#index"
 
-    match ':controller(/:action(/:id(.:format)))', :via => :all
+    #match ':controller(/:action(/:id(.:format)))', :via => :all
+
+    resources :events
 end

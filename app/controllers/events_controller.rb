@@ -12,13 +12,16 @@ class EventsController < ApplicationController
 
  	def create
 	 	@event = Event.new(event_params)
+
 		if @event.save
-			redirect_to :action => :index
+			#redirect_to :action => :index
+			redirect_to events_url
 			flash[:notice] = "event was successfully created"
 
 		else
 			render :action => :new
 		end
+		
 
  	end
 
@@ -36,7 +39,8 @@ class EventsController < ApplicationController
  	def update
 		if @event.update(event_params)
 			flash[:notice] = "event was successfully updated!"
-			redirect_to :action => :show, :id => @event
+			#redirect_to :action => :show, :id => @event
+			redirect_to event_url(@event)
 			#***RESTful**** redirect_to event_path(@event) # events/:id
 			# event_path(@event) # events/:id
 			# event_url(@event) # http://localhost:3000/events/:id 
