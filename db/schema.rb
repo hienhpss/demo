@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031070156) do
+ActiveRecord::Schema.define(version: 20161105061900) do
+
+  create_table "attendees", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_attendees_on_event_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_groupships", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_groupships_on_event_id"
+    t.index ["group_id"], name: "index_event_groupships_on_group_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +44,19 @@ ActiveRecord::Schema.define(version: 20161031070156) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "status"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|

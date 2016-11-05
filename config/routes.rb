@@ -8,5 +8,7 @@ Demo::Application.routes.draw do
 
     #match ':controller(/:action(/:id(.:format)))', :via => :all
 
-    resources :events
+    resources :events do
+ 	resources :attendees, :controller => "event_attendees"
+	end
 end
