@@ -1,3 +1,4 @@
 <%= @event.name %>
 <%= simple_format(@event.description) %>
+<%= @event.category.name %> 
 <p><%= link_to 'Back to index', events_path %></p>
