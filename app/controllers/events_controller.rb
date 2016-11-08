@@ -25,11 +25,6 @@ class EventsController < ApplicationController
 
  	end
 
- 	private
- 	def event_params
- 		params.require(:event).permit(:name, :description)
- 	end
-
  	def show
  	end
 
@@ -55,7 +50,23 @@ class EventsController < ApplicationController
 	 	flash[:alert] = "event was successfully deleted"
  	end
 
- 	def set_event
+ 	def latest
+ 		@events = Event.order("id DESC").limit(3)
+ 	end
+ 	
+
+ 	private
+	#protected
+ 	def event_params
+ 		params.require(:event).permit(:name, :description,
+:category_id, :group_ids => [])
+ 	end
+ 	
+ 	
+ 	#def event_params
+ 	#	params.require(:event).permit(:name, :description)
+ 	#end
+ 	 	def set_event
 	 	@event = Event.find(params[:id])
 	end
 end
