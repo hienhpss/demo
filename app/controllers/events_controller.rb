@@ -51,7 +51,7 @@ class EventsController < ApplicationController
  	end
 
  	def latest
- 		@events = Event.order("id DESC").limit(3)
+ 		@latest_events = Event.order("id DESC").limit(3)
  	end
  	
 
